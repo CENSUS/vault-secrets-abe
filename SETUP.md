@@ -229,27 +229,14 @@ curl --location --request POST 'https://localhost:8200/v1/abe/syskeygen/SA/admin
 
 ```yaml
 {
-  "request_id": "69388d0f-1cb6-839f-8f2c-913645bcdc56",
+  "request_id": "3f089415-0f64-88d7-f8b5-26017b488da9",
   "lease_id": "",
   "renewable": false,
   "lease_duration": 0,
-  "data": null,
+  "data": { "Authority:": "admin1", "System Attribute": "SA" },
   "wrap_info": null,
   "warnings": null,
-  "auth":
-    {
-      "client_token": "s.CTPtEBYPszSDcEsQeaadEzdX",
-      "accessor": "TkzhkGdQwZOd02f3koC4yVwj",
-      "policies": ["abe-admin-policy", "default"],
-      "token_policies": ["default"],
-      "identity_policies": ["abe-admin-policy"],
-      "metadata": { "username": "admin1" },
-      "lease_duration": 86400,
-      "renewable": true,
-      "entity_id": "6249a490-a784-caa9-8062-7748ed121197",
-      "token_type": "service",
-      "orphan": true,
-    },
+  "auth": null,
 }
 ```
 

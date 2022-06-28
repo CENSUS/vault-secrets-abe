@@ -1,6 +1,6 @@
 FROM ubuntu:21.04 AS builder
 RUN apt-get update
-RUN apt-get -y install curl flex bison libssl-dev python-dev libgmp-dev wget build-essential
+RUN apt-get -y install curl flex bison libssl-dev python-dev libgmp-dev build-essential
 
 RUN curl -OL https://golang.org/dl/go1.16.7.linux-amd64.tar.gz && tar -C /usr/local -xvf go1.16.7.linux-amd64.tar.gz
 ENV PATH=$PATH:/usr/local/go/bin
