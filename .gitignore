@@ -2,7 +2,6 @@
 abe
 
 .vscode
-other/docker/vault/config/data 
-other/docker/vault/config/certificates 
+other/docker/vault/config/build
+other/docker/vault/config/vault_data
 other/docker/vault/config/vault_operator_secrets.json
-

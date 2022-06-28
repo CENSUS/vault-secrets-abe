@@ -5,14 +5,15 @@ VAULT_INIT_SCRIPT="/home/vault/config/vault_init.sh"
 
 # VAULT CONFIG
 CONFIG_PATH="/home/vault/config"
+BUILD_FILES="${CONFIG_PATH}/build"
 LOG_LEVEL=debug
 
 # CA/TLS CONFIG
-export CA_CERTIFICATE="${CONFIG_PATH}/certificates/ca/ca.crt"
-CA_KEY="${CONFIG_PATH}/certificates/ca/ca.key"
-VAULT_CSR="${CONFIG_PATH}/certificates/csr/vault.csr"
-export TLS_CERTIFICATE="${CONFIG_PATH}/certificates/tls/tls.crt"
-export TLS_KEY="${CONFIG_PATH}/certificates/tls/tls.key"
+export CA_CERTIFICATE="${BUILD_FILES}/certificates/ca/ca.crt"
+CA_KEY="${BUILD_FILES}/certificates/ca/ca.key"
+VAULT_CSR="${BUILD_FILES}/certificates/csr/vault.csr"
+export TLS_CERTIFICATE="${BUILD_FILES}/certificates/tls/tls.crt"
+export TLS_KEY="${BUILD_FILES}/certificates/tls/tls.key"
 
 function generate_certificates {
 
@@ -26,21 +27,19 @@ function generate_certificates {
 
     openssl x509 -in "${TLS_CERTIFICATE}" -text -noout
 
-    # chown -R nobody:nobody "${CONFIG_DIR}"
-    # chmod -R 777 "${CONFIG_PATH}"
+    chown -R nobody:nobody "${BUILD_FILES}"
+    chmod -R 777 "${BUILD_FILES}"
 }
 
 function init {
-    mkdir -p "${CONFIG_PATH}"/certificates/ca
-    mkdir -p "${CONFIG_PATH}"/certificates/csr
-    mkdir -p "${CONFIG_PATH}"/certificates/tls
+    mkdir -p "${BUILD_FILES}"/certificates/ca
+    mkdir -p "${BUILD_FILES}"/certificates/csr
+    mkdir -p "${BUILD_FILES}"/certificates/tls
 
     generate_certificates
 
     nohup vault server -log-level=${LOG_LEVEL} -config /home/vault/config/vault_config/config.hcl &
     VAULT_PID=$!
-
-    which bash
 
     if [ -f "$VAULT_INIT_SCRIPT" ]; then
         /bin/bash $VAULT_INIT_SCRIPT

@@ -8,6 +8,8 @@ services:
       - "8200:8200"
     volumes:
       - "./vault/config:/home/vault/config:rw"
+      - "./configs:/home/vault/other/configs:ro"
+      - "./policies:/home/vault/other/policies:ro"
     entrypoint: /home/vault/config/entrypoint.sh
     networks:
       - vault
